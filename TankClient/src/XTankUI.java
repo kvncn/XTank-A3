@@ -189,7 +189,12 @@ public class XTankUI
 				System.out.println("SOMETHING WRONG WHEN CLIENT WROTE TO SERVER");
 				e.printStackTrace();
 			}
-			
+			try {
+				Thread.sleep(16);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			try {
 				tanks = new ArrayList<>();
 				shots = new ArrayList<>();

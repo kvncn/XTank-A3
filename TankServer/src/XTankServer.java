@@ -13,14 +13,14 @@ import java.util.ArrayList;
  */
 public class XTankServer 
 {
-	static ArrayList<DataOutputStream> sq;
+	//static ArrayList<DataOutputStream> sq;
 	static XTankModel md;
 	static Integer i = 0;
 	
     public static void main(String[] args) throws Exception 
     {
 		System.out.println(InetAddress.getLocalHost());
-		sq = new ArrayList<>();
+		//sq = new ArrayList<>();
 		md = new XTankModel();
 		
         try (var listener = new ServerSocket(59896)) 
@@ -69,21 +69,22 @@ public class XTankServer
                 		in.readInt();
                 		in.readInt();
                 		in.readInt();
-                		md.moveBullets();
                 	}
                 	md.moveBullets();
-                	md.regHits();
+            		md.regHits();
+            		Thread.sleep(16);
+                	//md.moveBullets();
             		for (Tank tk : md.getTanks()) {
             			//System.out.println("PASSING TANK (" + tk.toString() + ") and coords: (" + tk.getXpos() +", " + tk.getYpos() + ")");
             			out.writeInt(tk.getXpos());
             			out.writeInt(tk.getYpos());
             			out.writeInt(tk.getAngle());
-            			out.flush();
             			out.writeInt(tk.getShot().getXpos());
             			out.writeInt(tk.getShot().getYpos());
             			out.writeInt(tk.getShot().getAngle());
-            			out.flush();
             		}
+            		
+            		out.flush();
                 }
             } 
             catch (Exception e) 

@@ -9,8 +9,9 @@ public class XTank
     {
         try (var socket = new Socket("127.0.0.1", 59896)) 
         {
-        	DataInputStream in = new DataInputStream(socket.getInputStream());
+        	
         	DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+        	DataInputStream in = new DataInputStream(socket.getInputStream());
             var ui = new XTankUI(in, out);
             ui.start();
         }
