@@ -52,7 +52,9 @@ public class XTankUI
 			//System.out.println("Let's print da tanks: " + tanks);
 			}
 			int tankAngle = 2;
-			event.gc.setBackground(shell.getDisplay().getSystemColor(SWT.COLOR_WHITE));
+			event.gc.setForeground(shell.getDisplay().getSystemColor(SWT.COLOR_WHITE));
+			event.gc.drawRectangle(0, 0, 900, 900);
+			event.gc.setForeground(shell.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 			for (int i = 0; i < tanks.size() - 2; i+=3) {
 				int tankX = tanks.get(i);
 				int tankY = tanks.get(i+1);
@@ -135,6 +137,17 @@ public class XTankUI
                 	}
             	}
 				
+				try {
+					out.writeInt(mode);
+					out.writeInt(angle);
+					out.writeInt(x);
+					out.writeInt(y);
+					out.flush();
+				} catch (IOException e1) {
+					System.out.println("SOMETHING WRONG WHEN CLIENT WROTE TO SERVER");
+					e1.printStackTrace();
+				}
+				
 				canvas.redraw();
 			}
 			public void keyReleased(KeyEvent e) {}
@@ -175,16 +188,6 @@ public class XTankUI
 	{
 		public void run() 
 		{
-			try {
-				out.writeInt(mode);
-				out.writeInt(angle);
-				out.writeInt(x);
-				out.writeInt(y);
-				out.flush();
-			} catch (IOException e1) {
-				System.out.println("SOMETHING WRONG WHEN CLIENT WROTE TO SERVER");
-				e1.printStackTrace();
-			}
 			try {
 				
 				if (in.available() > 0) {
