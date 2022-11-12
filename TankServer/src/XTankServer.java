@@ -72,8 +72,7 @@ public class XTankServer
                 	}
                 	md.moveBullets();
             		md.regHits();
-            		Thread.sleep(16);
-                	//md.moveBullets();
+            		//md.moveBullets();
             		for (Tank tk : md.getTanks()) {
             			//System.out.println("PASSING TANK (" + tk.toString() + ") and coords: (" + tk.getXpos() +", " + tk.getYpos() + ")");
             			out.writeInt(tk.getXpos());

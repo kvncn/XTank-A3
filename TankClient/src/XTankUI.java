@@ -98,6 +98,7 @@ public class XTankUI
 			for (int i = 0; i < maze.length - 3; i += 4) {
 				event.gc.drawLine(maze[i], maze[i+1], maze[i+2], maze[i+3]);
 			}
+			//event.gc.setBackground(shell.getDisplay().getSystemColor(SWT.COLOR_WHITE));
 		});
 		
 		canvas.addKeyListener(new KeyListener() {
@@ -134,16 +135,7 @@ public class XTankUI
                 	}
             	}
 				
-				try {
-					out.writeInt(mode);
-					out.writeInt(angle);
-					out.writeInt(x);
-					out.writeInt(y);
-					out.flush();
-				} catch (IOException e1) {
-					System.out.println("SOMETHING WRONG WHEN CLIENT WROTE TO SERVER");
-					e1.printStackTrace();
-				}
+				canvas.redraw();
 			}
 			public void keyReleased(KeyEvent e) {}
 		});
@@ -153,14 +145,7 @@ public class XTankUI
 		display.asyncExec(runnable);
 		shell.open();
 		while(!shell.isDisposed()) {
-			if(!display.readAndDispatch()) {
-				try {
-					Thread.sleep(16);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
+			if(!display.readAndDispatch()) {}
 		}
 		display.dispose();
 	}
@@ -191,6 +176,17 @@ public class XTankUI
 		public void run() 
 		{
 			try {
+				out.writeInt(mode);
+				out.writeInt(angle);
+				out.writeInt(x);
+				out.writeInt(y);
+				out.flush();
+			} catch (IOException e1) {
+				System.out.println("SOMETHING WRONG WHEN CLIENT WROTE TO SERVER");
+				e1.printStackTrace();
+			}
+			try {
+				
 				if (in.available() > 0) {
 				tanks = new ArrayList<>();
 				shots = new ArrayList<>();
@@ -213,14 +209,14 @@ public class XTankUI
 				shots.add(shotY);
 				shots.add(shotAngle);
 				}
-				canvas.update();
+			
 				canvas.redraw();	
 	            
 			} catch (IOException e) {
 				System.out.println("SOMETHING WRONG WHEN CLIENT READ FROM SERVER");
 				e.printStackTrace();
 			}
-			display.timerExec(16, this);
+			display.timerExec(1, this);
 		}
 	};	
 }

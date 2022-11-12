@@ -21,16 +21,16 @@ public class Bullet {
 	
 	public Boolean move() {
 		if (angle == 0) {
-			if (xPos < 900) xPos += 1;
+			if (xPos < 900) xPos += 15;
 			else return true;
 		} else if (angle == 1){
-			if (xPos > 0) xPos -= 1;
+			if (xPos > 0) xPos -= 15;
 			else return true;
 		} else if (angle == 2){
-			if (yPos > 0) yPos -= 1;
+			if (yPos > 0) yPos -= 15;
 			else return true;
 		} else if (angle == 3){
-			if (yPos < 900) yPos += 1;
+			if (yPos < 900) yPos += 15;
 			else return true;
 		}
 		return false;
