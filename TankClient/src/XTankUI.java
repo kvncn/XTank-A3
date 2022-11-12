@@ -133,6 +133,17 @@ public class XTankUI
                 		y = newY;
                 	}
             	}
+				
+				try {
+					out.writeInt(mode);
+					out.writeInt(angle);
+					out.writeInt(x);
+					out.writeInt(y);
+					out.flush();
+				} catch (IOException e1) {
+					System.out.println("SOMETHING WRONG WHEN CLIENT WROTE TO SERVER");
+					e1.printStackTrace();
+				}
 			}
 			public void keyReleased(KeyEvent e) {}
 		});
@@ -180,22 +191,7 @@ public class XTankUI
 		public void run() 
 		{
 			try {
-				out.writeInt(mode);
-				out.writeInt(angle);
-				out.writeInt(x);
-				out.writeInt(y);
-				out.flush();
-			} catch (IOException e) {
-				System.out.println("SOMETHING WRONG WHEN CLIENT WROTE TO SERVER");
-				e.printStackTrace();
-			}
-			try {
-				Thread.sleep(16);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			try {
+				if (in.available() > 0) {
 				tanks = new ArrayList<>();
 				shots = new ArrayList<>();
 				
@@ -216,13 +212,15 @@ public class XTankUI
 				shots.add(shotX);
 				shots.add(shotY);
 				shots.add(shotAngle);
+				}
+				canvas.update();
+				canvas.redraw();	
+	            
 			} catch (IOException e) {
 				System.out.println("SOMETHING WRONG WHEN CLIENT READ FROM SERVER");
 				e.printStackTrace();
 			}
-			canvas.update();
-			canvas.redraw();	
-            display.timerExec(1, this);
+			display.timerExec(16, this);
 		}
 	};	
 }
