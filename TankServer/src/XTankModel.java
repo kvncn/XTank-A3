@@ -15,8 +15,11 @@ import java.util.List;
  * 
  */
 public class XTankModel {
-	private int[] maze = {100, 100, 100, 400, 700, 100, 950, 100,
-			450, 650, 450, 750, 650, 650, 650, 750, 450, 650, 650, 650, 450, 750, 650, 750};
+	private int [][] mazes = {{100, 100, 100, 400, 700, 100, 950, 100,
+		450, 650, 450, 750, 650, 650, 650, 750, 450, 650, 650, 650, 450, 750, 650, 750},
+		{300, 300, 300, 100, 100, 800, 50, 900, 250, 450, 250, 550, 450, 450, 450, 550,
+		550, 250, 250, 250, 450, 750, 650, 750}};
+	private int[] maze;
 	private List<Tank> tanks;
 	private List<Bullet> shots; 
 	
@@ -24,9 +27,10 @@ public class XTankModel {
 	 * initializes the model with empty lists of tank and bullet 
 	 * objects that get updated as clients join the server
 	 */
-	public XTankModel() {
+	public XTankModel(int mazeType) {
 		tanks = new ArrayList<Tank>();
 		shots = new ArrayList<Bullet>();
+		maze = mazes[mazeType];
 	}
 	
 	/**
@@ -95,15 +99,12 @@ public class XTankModel {
 	 * from the game
 	 */
 	public void regHits() {
-		//System.out.println("LETS CHECK THEM HITS");
+		// for each shot check all tanks, check if we are hitting them
 		for (Bullet shot : shots) {
-			//System.out.println("SHOT: " + shot);
 			for (Tank tank : tanks) {
 				if (shot.getShooter().equals(tank)) continue;
 				if (shot.getXpos() >= tank.getXpos() - 20 && shot.getXpos() <= tank.getXpos() + 20) {
-					//System.out.println("CHECKING Y");
 					if (shot.getYpos() >= tank.getYpos() - 20 && shot.getYpos() <= tank.getYpos() +20) {
-						//System.out.println("DAMAGE IS " + shot.getDamage());
 						tank.hit(shot.getDamage());
 						if(tank.death()) {
 							tanks.remove(tank);

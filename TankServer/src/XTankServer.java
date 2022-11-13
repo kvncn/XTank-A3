@@ -22,28 +22,48 @@ import java.net.InetAddress;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * When a client connects, a new thread is started to handle it.
  */
 public class XTankServer 
 {
-	static ArrayList<DataOutputStream> sq;
 	static XTankModel md;
 	static Integer i = 0; //used to id tanks
+	static int mazeType;
 	
     public static void main(String[] args) throws Exception 
     {
     	//use this to get the local host address to play on
     	//multiple computers
 		System.out.println(InetAddress.getLocalHost());
-		sq = new ArrayList<>();
-		md = new XTankModel();
+		System.out.println("*** Welcome to Kate and Kevin's xTank! ***");
+		
+		// Get input for game/tank qualifier
+		Scanner scan = new Scanner(System.in);
+        System.out.println("Select a maze (1 or 2)");
+        
+        // Clean up selection to ensure that it is valid
+        mazeType = scan.nextInt();
+        switch (mazeType) {
+		case 1: System.out.println(); break;
+		case 2: System.out.println(); break;
+		default: 
+			System.out.println("\nSorry that maze does not exist, "
+				+ "using standard"); 
+			mazeType = 1;
+			break;
+		}
+        scan.close();
+        mazeType--;
+        System.out.println("SERVER SIDE MAZETYPE: " + mazeType);
+		md = new XTankModel(mazeType);
 		
         try (var listener = new ServerSocket(59896)) 
         {
             System.out.println("The XTank server is running...");
-            //limit of 20 clients
+            //limit of 20 clients for now
             var pool = Executors.newFixedThreadPool(20);
             while (true) 
             {
@@ -75,6 +95,9 @@ public class XTankServer
             {
             	DataInputStream in = new DataInputStream(socket.getInputStream());
             	DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+            	
+            	out.writeInt(mazeType);
+            	out.flush();
             	// types are: standard, bomb, turtle
             	// depending on what the user wants to be
             	int typeInt = in.readInt();

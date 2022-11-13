@@ -42,6 +42,7 @@ public class XTank
     			tankType = 1;
     			break;
     		}
+            scan.close();
             out.writeInt(tankType);
             ui.start();
         }

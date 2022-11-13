@@ -61,8 +61,14 @@ public class XTankUI
 		this.out = out;
 		tanks = new ArrayList<>();
 		shots = new ArrayList<>();
+		int mazeType = 0;
+		try {
+			mazeType = in.readInt();
+		} catch (IOException e) {
+			System.out.println("Uh Oh, using default maze");
+		}
+		maze = getMaze(mazeType);
 		mode = 0;
-		maze = getMaze();
 	}
 	
 	/**
@@ -222,12 +228,12 @@ public class XTankUI
 	 * Gets the maze in use. Must return the maze being used by all clients
 	 * @return
 	 */
-	private int [] getMaze() {
+	private int [] getMaze(int mazeType) {
 		int [][] mazes = {{100, 100, 100, 400, 700, 100, 950, 100,
 			450, 650, 450, 750, 650, 650, 650, 750, 450, 650, 650, 650, 450, 750, 650, 750},
 			{300, 300, 300, 100, 100, 800, 50, 900, 250, 450, 250, 550, 450, 450, 450, 550,
 			550, 250, 250, 250, 450, 750, 650, 750}};
-		return mazes[0];
+		return mazes[mazeType];
 	}
 	
 	/**
