@@ -13,17 +13,17 @@ BASIC CONTROLS:
   
   
   
-COMPILE TIME FLEXIBLITY:
+RUN TIME FLEXIBLITY:
 
-  -can change type of tank at line 80 of XTankServer
-
+  -can change type of tank when a new client starts (terminal std input)
+  
     "standard" for the standard tank with 100 health and 50 damage. Represented by light blue color
     
     "bomb" for the bomb tank with 100 health and 100 damage. Represented by a dark red color
     
     "turtle" for the turtle tank with 200 health and 50 damage. Represented by a dark green color
      
-  -can select different type maze at line 235 of XTANK UI
+  -can select different type maze at server start (terminal std input)
 
 
 TIPS FOR TESTING:
