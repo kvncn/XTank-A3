@@ -75,9 +75,17 @@ public class XTankServer
             {
             	DataInputStream in = new DataInputStream(socket.getInputStream());
             	DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            	//TYPE CAN BE CHANGED AT COMPILE TIME
             	// types are: standard, bomb, turtle
-            	Tank tank = new Tank(300, 500, 2, ++i, "bomb");
+            	// depending on what the user wants to be
+            	int typeInt = in.readInt();
+            	String tankType =  "";
+            	switch (typeInt) {
+        		case 1: tankType = "standard"; break;
+        		case 2: tankType = "bomb"; break;
+        		case 3: tankType = "turtle"; break;
+        		default: tankType = "standard"; break;
+        		}
+            	Tank tank = new Tank(300, 500, 2, ++i, tankType);
             	//adding tank to model
             	md.addTank(tank);
                 int mode, x, y, angle;
@@ -104,7 +112,6 @@ public class XTankServer
                 	md.moveBullets();
                 	md.regHits();
             		for (Tank tk : md.getTanks()) {
-            			//System.out.println("PASSING TANK (" + tk.toString() + ") and coords: (" + tk.getXpos() +", " + tk.getYpos() + ")");
             			//writing tank information to client
             			out.writeInt(tk.getXpos());
             			out.writeInt(tk.getYpos());

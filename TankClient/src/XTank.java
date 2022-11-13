@@ -1,4 +1,5 @@
 import java.net.Socket;
+import java.util.Scanner;
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
 /**
@@ -23,6 +24,25 @@ public class XTank
         	DataInputStream in = new DataInputStream(socket.getInputStream());
         	DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             var ui = new XTankUI(in, out);
+            System.out.println("*** Welcome to Kate and Kevin's xTank! ***");
+    		
+    		// Get input for game/tank qualifier
+    		Scanner scan = new Scanner(System.in);
+            System.out.println("Select Tank type: (1 - standard) (2 - bomb) (3 - turtle)");
+            
+            // Clean up selection to ensure that it is valid
+            int tankType = scan.nextInt();
+            switch (tankType) {
+    		case 1: System.out.println(); break;
+    		case 2: System.out.println(); break;
+    		case 3: System.out.println(); break;
+    		default: 
+    			System.out.println("\nSorry that tank does not exist, "
+    				+ "using standard"); 
+    			tankType = 1;
+    			break;
+    		}
+            out.writeInt(tankType);
             ui.start();
         }
     }

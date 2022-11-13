@@ -82,11 +82,7 @@ public class XTankUI
 		canvas = new Canvas(shell, SWT.BACKGROUND);
 		
 		canvas.addPaintListener(event -> {
-			if (tanks.size() != 0) {
-			//System.out.println("Let's print da tanks: " + tanks);
-			}
 			int tankAngle = 2;
-			//event.gc.setBackground(shell.getDisplay().getSystemColor(SWT.COLOR_WHITE));
 			//each tank will always have x, y coor with angle and type
 			//thus can reliably skip 4
 			for (int i = 0; i < tanks.size() - 3; i+=4) {
@@ -169,7 +165,6 @@ public class XTankUI
 				try {
 					Thread.sleep(16);
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -295,7 +290,6 @@ public class XTankUI
 				out.writeInt(angle);
 				out.writeInt(x);
 				out.writeInt(y);
-				//out.writeInt(type);
 				out.flush();
 			} catch (IOException e) {
 				System.out.println("SOMETHING WRONG WHEN CLIENT WROTE TO SERVER");
@@ -314,8 +308,6 @@ public class XTankUI
 				int shotX = in.readInt();
 				int shotY = in.readInt();
 				int shotAngle = in.readInt();
-				//System.out.println("Im getting this position: (" + tankX + ", " + tankY + ")");
-				//System.out.println("Im getting this shot: (" + shotX + ", " + shotY + ")");
 				
 				tanks.add(tankX);
 				tanks.add(tankY);
