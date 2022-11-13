@@ -30,8 +30,7 @@ import java.util.ArrayList;
  */
 public class XTankUI
 {
-	private int[] maze = {100, 100, 100, 400, 700, 100, 950, 100,
-			450, 650, 450, 750, 650, 650, 650, 750, 450, 650, 650, 650, 450, 750, 650, 750};
+	private int[] maze;
 	// The location and direction of the "tank"
 	private int x = 300;
 	private int y = 500;
@@ -63,6 +62,7 @@ public class XTankUI
 		tanks = new ArrayList<>();
 		shots = new ArrayList<>();
 		mode = 0;
+		maze = getMaze();
 	}
 	
 	/**
@@ -115,7 +115,7 @@ public class XTankUI
 				}
 			}
 			
-			//draw maze obstables
+			//draw maze obstacles
 			for (int i = 0; i < maze.length - 3; i += 4) {
 				event.gc.drawLine(maze[i], maze[i+1], maze[i+2], maze[i+3]);
 			}
@@ -221,6 +221,18 @@ public class XTankUI
 			event.gc.setLineWidth(2);
 			event.gc.drawLine(tankX+12, tankY+13, tankX-7, tankY+13);
 		}
+	}
+	
+	/**
+	 * Gets the maze in use. Must return the maze being used by all clients
+	 * @return
+	 */
+	private int [] getMaze() {
+		int [][] mazes = {{100, 100, 100, 400, 700, 100, 950, 100,
+			450, 650, 450, 750, 650, 650, 650, 750, 450, 650, 650, 650, 450, 750, 650, 750},
+			{300, 300, 300, 100, 100, 800, 50, 900, 250, 450, 250, 550, 450, 450, 450, 550,
+			550, 250, 250, 250, 450, 750, 650, 750}};
+		return mazes[0];
 	}
 	
 	/**
