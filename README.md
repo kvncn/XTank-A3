@@ -9,7 +9,7 @@ BASIC CONTROLS:
 
   -Movement is basic ASWD, not arrow keys 
   
-  -shoot by pressing the space bar
+  -shoot by pressing the space bar (also press another key right after it, so the animation is sure to start)
   
   
   
