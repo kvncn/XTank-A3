@@ -15,3 +15,7 @@ COMPILE TIME FLEXIBLITY:
       -"bomb" for the bomb tank with 100 health and 100 damage. Represented by a dark red color
       -"turtle" for the turtle tank with 200 health and 50 damage. Represented by a dark green color
   -can select different type maze at line 235 of XTANK UI
+
+
+TIPS FOR TESTING:
+  -We have found it useful to move the first tank up a bit and then introduce the second client. When the tanks shots, it may take a second and/or require some clicking on keys
