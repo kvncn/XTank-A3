@@ -57,7 +57,6 @@ public class XTankServer
 		}
         scan.close();
         mazeType--;
-        System.out.println("SERVER SIDE MAZETYPE: " + mazeType);
 		md = new XTankModel(mazeType);
 		
         try (var listener = new ServerSocket(59896)) 

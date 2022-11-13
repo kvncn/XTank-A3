@@ -15,7 +15,7 @@ import java.util.List;
  * 
  */
 public class XTankModel {
-	private int [][] mazes = {{100, 100, 100, 400, 700, 100, 950, 100,
+	private int[][] mazes = {{100, 100, 100, 400, 700, 100, 950, 100,
 		450, 650, 450, 750, 650, 650, 650, 750, 450, 650, 650, 650, 450, 750, 650, 750},
 		{300, 300, 300, 100, 100, 800, 50, 900, 250, 450, 250, 550, 450, 450, 450, 550,
 		550, 250, 250, 250, 450, 750, 650, 750}};
@@ -111,6 +111,7 @@ public class XTankModel {
 							shots.remove(shot);
 							return;
 						}
+						
 						shots.remove(shot);
 						return;
 					}

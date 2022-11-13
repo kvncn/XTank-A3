@@ -31,6 +31,7 @@ import java.util.ArrayList;
 public class XTankUI
 {
 	private int[] maze;
+	
 	// The location and direction of the "tank"
 	private int x = 300;
 	private int y = 500;
@@ -159,6 +160,7 @@ public class XTankUI
                 	}
             	}
 			}
+			
 			public void keyReleased(KeyEvent e) {}
 		});
 		
