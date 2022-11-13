@@ -29,3 +29,7 @@ RUN TIME FLEXIBLITY:
 TIPS FOR TESTING:
 
   -We have found it useful to move the first tank up a bit and then introduce the second client. When the tanks shots, it may take a second and/or require some clicking on keys
+
+EXTRA: 
+
+  -We understand the reason for the latency, it is because we do constant read/writes, but that ensures we never have out of date frames on clients, even if there is latency. This also ensures our bullet doesn't need anything special to move (like perhaps constantly flickering mouse over the screen)
